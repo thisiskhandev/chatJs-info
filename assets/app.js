@@ -87,6 +87,14 @@ $(document).ready(function ($) {
             ${agentMsgArr}
             </h6>
           </div>
+          <div class="avatar">
+            <img
+              src="./assets/images/agent-min.png"
+              alt="User"
+              width="60"
+              style="max-width: 100%"
+            />
+          </div>
         </section>
       `;
     });
@@ -96,6 +104,14 @@ $(document).ready(function ($) {
       data.user.map(function (userMsgArr, userIndex) {
         userChatBox += `
       <section class="chat_box user">
+        <div class="avatar">
+          <img
+            src="./assets/images/visitor-min.png"
+            alt="User"
+            width="60"
+            style="max-width: 100%"
+          />
+        </div>
         <div class="msg">
           <h5>Visitor: ${strTime}</h5>
           <h6>${userMsgArr}</h6>
