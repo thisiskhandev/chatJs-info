@@ -1,9 +1,8 @@
 $(document).ready(function ($) {
-  let chatDuration = 2000;
-  let firstDelay = 6000;
-  let totalTime = 0;
-
   function chatDisplay() {
+    let chatDuration = 2000;
+    let firstDelay = 500;
+    let totalTime = 0;
     setTimeout(function () {
       jQuery(".chat_box_conversation").removeClass("conversation_is_activated");
       jQuery(".chat_box.user:not(.user+.user)").addClass("user_first_node");
@@ -21,28 +20,15 @@ $(document).ready(function ($) {
 
         jQuery(elem)
           .parents(".chat_box_conversation")
-          .delay(duration)
           .queue(function (next) {
             var $this = jQuery(this);
             setTimeout(function () {
               $this.addClass("conversation_is_activated");
               next();
-              console.log(duration);
-            }, 0);
+              // console.log(elem);
+              // console.log(duration); // Main Timer
+            }, duration);
           });
-
-        // jQuery(".greeting_col .check_box").each(function (_, checkElem) {
-        //   jQuery(checkElem)
-        //     .find("img")
-        //     .delay(0)
-        //     .queue(function (next) {
-        //       let $this = jQuery(this);
-        //       setTimeout(function () {
-        //         $this.fadeIn(300);
-        //         next();
-        //       }, duration);
-        //     });
-        // });
 
         setTimeout(() => {
           // $(".chat_body").animate(
@@ -57,10 +43,10 @@ $(document).ready(function ($) {
             },
             300
           );
-
-          // console.log(duration);
+          console.log(duration);
         }, duration + 2000);
       });
+
       var startEvent = new CustomEvent("slide_ended", {
         detail: { timer: totalTime },
       });
@@ -73,9 +59,9 @@ $(document).ready(function ($) {
     setTimeout(function () {
       jQuery(".chat_box").fadeOut(0);
       chatDisplay();
-      jQuery(".greeting_col .check_box img").fadeOut(0);
+      // jQuery(".greeting_col .check_box img").fadeOut(0);
       console.log("Event restarted: " + event.detail.timer);
-    }, event.detail.timer + firstDelay);
+    }, event.detail.timer + 10000);
   });
 
   const today = new Date();
@@ -167,4 +153,4 @@ $(document).ready(function ($) {
   chatDisplay(); // DEVELOPMENT
 });
 
-console.log(chatData[1].agent);
+// console.log(chatData[1].agent);
