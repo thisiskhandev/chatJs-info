@@ -1,15 +1,49 @@
 $(document).ready(function ($) {
   let chatDuration = 2000;
-  let firstDelay = 500;
+  let firstDelay = 6000;
   let totalTime = 0;
+
   function chatDisplay() {
-    totalTime = 0;
     setTimeout(function () {
+      jQuery(".chat_box_conversation").removeClass("conversation_is_activated");
       jQuery(".chat_box.user:not(.user+.user)").addClass("user_first_node");
+      // jQuery(".greeting_col .check_box").each(function (ind, checkElem) {
+      //   let duration = chatDuration * ind;
+      //   totalTime = duration;
+      //   jQuery(checkElem).find("img").delay(duration).fadeIn(300);
+      // });
       jQuery(".chat_box").each(function (ind, elem) {
         let duration = chatDuration * ind;
+        // console.log(duration);
         totalTime = duration;
+
         jQuery(elem).delay(duration).slideDown(300);
+
+        jQuery(elem)
+          .parents(".chat_box_conversation")
+          .delay(duration)
+          .queue(function (next) {
+            var $this = jQuery(this);
+            setTimeout(function () {
+              $this.addClass("conversation_is_activated");
+              next();
+              console.log(duration);
+            }, 0);
+          });
+
+        // jQuery(".greeting_col .check_box").each(function (_, checkElem) {
+        //   jQuery(checkElem)
+        //     .find("img")
+        //     .delay(0)
+        //     .queue(function (next) {
+        //       let $this = jQuery(this);
+        //       setTimeout(function () {
+        //         $this.fadeIn(300);
+        //         next();
+        //       }, duration);
+        //     });
+        // });
+
         setTimeout(() => {
           // $(".chat_body").animate(
           //   {
@@ -17,13 +51,14 @@ $(document).ready(function ($) {
           //   },
           //   1000
           // );
-          $(".chat_body").animate(
+          $(".chat_column.main_chat").animate(
             {
               scrollTop: $(document).height() + $(window).height(),
             },
             300
           );
-          console.log(duration);
+
+          // console.log(duration);
         }, duration + 2000);
       });
       var startEvent = new CustomEvent("slide_ended", {
@@ -36,9 +71,10 @@ $(document).ready(function ($) {
   // Restarting the ChatDisplay Function
   document.addEventListener("slide_ended", (event) => {
     setTimeout(function () {
-      jQuery(".chat_box").fadeOut(300);
+      jQuery(".chat_box").fadeOut(0);
       chatDisplay();
-      console.log(event.detail.timer);
+      jQuery(".greeting_col .check_box img").fadeOut(0);
+      console.log("Event restarted: " + event.detail.timer);
     }, event.detail.timer + firstDelay);
   });
 
@@ -131,4 +167,4 @@ $(document).ready(function ($) {
   chatDisplay(); // DEVELOPMENT
 });
 
-// console.log(chatData[0].agent[0])
+console.log(chatData[1].agent);

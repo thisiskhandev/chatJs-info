@@ -11,7 +11,7 @@
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  overflow: hidden;
+  align-items: center;
 }
 .chat_column {
   width: 100%;
@@ -85,12 +85,22 @@ section.chat_row > .main_chat {
   align-items: start;
   column-gap: 8px;
 }
+.greeting_col {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  row-gap: 30px;
+  margin-left: 80px;
+}
 .check_content h5 {
   font-size: 18px;
   text-transform: capitalize;
+  margin: 0;
 }
 .check_content p {
   font-size: 15px;
+  margin: 0;
 }
 .check_box .checked {
   border: 2px solid;
@@ -141,13 +151,20 @@ section.chat_row > .main_chat {
 .main_chat_box img {
   pointer-events: none;
 }
+.chat_column.main_chat {
+  overflow-y: auto;
+  height: 90vh;
+  background-color: #ddd;
+}
+/*
 .chat_body {
   height: 400px;
-  width: 35%; /* DEBUGGING */
+  width: 35%;
   background-color: #c4c4c4;
   overflow-y: auto;
   margin: auto;
 }
+*/
 /* ------------- MEDIA QURIES */
 
 @media only screen and (max-width: 1024px) {
