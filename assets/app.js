@@ -1,7 +1,7 @@
 $(document).ready(function ($) {
   let firstDelay = 500;
   let eventCounter = 0;
-  let limitStart = 11;
+  let limitStart = 15;
   let isPaused = false;
 
   document.addEventListener("visibilitychange", (event) => {
@@ -191,21 +191,21 @@ $(document).ready(function ($) {
     jQuery(".greeting_col").append(checkInfo);
   });
 
-  const ChatSection = document.querySelector(".chat_body");
-  let isChatDisplayed = false;
+  // const ChatSection = document.querySelector(".chat_body");
+  // let isChatDisplayed = false;
 
-  function isElementInViewport(el) {
-    const rect = el.getBoundingClientRect();
-    return rect.top >= 0 && rect.bottom <= window.innerHeight;
-  }
-  window.addEventListener("scroll", function () {
-    // console.log(isElementInViewport(ChatSection));
-    if (isElementInViewport(ChatSection) && !isChatDisplayed) {
-      console.log("Chat play!");
-      chatDisplay(); // PRODUCTION
-      isChatDisplayed = true;
-    }
-  });
+  // function isElementInViewport(el) {
+  //   const rect = el.getBoundingClientRect();
+  //   return rect.top >= 0 && rect.bottom <= window.innerHeight;
+  // }
+  // window.addEventListener("scroll", function () {
+  //   // console.log(isElementInViewport(ChatSection));
+  //   if (isElementInViewport(ChatSection) && !isChatDisplayed) {
+  //     console.log("Chat play!");
+  //     chatDisplay(); // PRODUCTION
+  //     isChatDisplayed = true;
+  //   }
+  // });
 
-  // chatDisplay(); // DEVELOPMENT
+  chatDisplay(); // DEVELOPMENT
 });
