@@ -1,21 +1,22 @@
 $(document).ready(function ($) {
   let firstDelay = 500;
   let eventCounter = 0;
-  let limitStart = 5;
+  let limitStart = 11;
   let isPaused = false;
 
   document.addEventListener("visibilitychange", (event) => {
     if (document.visibilityState == "visible") {
       isPaused = false;
-      console.log(isPaused);
+      // console.log(isPaused);
     } else {
       isPaused = true;
-      console.log(isPaused);
+      // console.log(isPaused);
     }
   });
 
   if (!isPaused) {
     function chatDisplay() {
+      console.log("not paused");
       let chatDuration = 2000;
       let totalTime = 0;
 
@@ -52,22 +53,14 @@ $(document).ready(function ($) {
             .parents(".chat_box_conversation")
             .queue(function (next) {
               var $this = jQuery(this);
-              // console.log($this);
               setTimeout(function () {
                 $this.addClass("conversation_is_activated");
                 next();
-                // console.log(elem);
                 // console.log(duration); // Main Timer
               }, duration);
             });
 
           setTimeout(() => {
-            // $(".chat_body").animate(
-            //   {
-            //     scrollTop: $(elem).offset().top,
-            //   },
-            //   1000
-            // );
             jQuery(".chat_column.main_chat").animate(
               {
                 scrollTop: jQuery(document).height() + jQuery(window).height(),
@@ -89,8 +82,6 @@ $(document).ready(function ($) {
       jQuery(".greeting_col .check_box .check_content").css("color", "gray");
       jQuery(".greeting_col .check_box .check_content h5").css("color", "gray");
     }
-  } else {
-    return;
   }
 
   // Restarting the ChatDisplay Function
@@ -102,21 +93,13 @@ $(document).ready(function ($) {
 
       // Paused
       if (eventCounter === limitStart) {
-        console.log("5 Times equal");
+        console.log(limitStart + " Times equal");
         return;
       }
 
-      if (isPaused) {
-        return;
-      } else {
-        jQuery(".chat_box").fadeOut(0);
-        initialInfo();
-        chatDisplay();
-      }
-
-      // jQuery(".chat_box").fadeOut(0);
-      // initialInfo();
-      // chatDisplay();
+      jQuery(".chat_box").fadeOut(0);
+      initialInfo();
+      chatDisplay();
 
       eventCounter = eventCounter + 1;
       console.log("Event Counter: " + eventCounter);
@@ -137,11 +120,11 @@ $(document).ready(function ($) {
   // Data Mapping
   jQuery(chatData).map(function (ind, data) {
     let agentChatBox = "";
-    data.agent.map(function (agentMsgArr, agentIndex) {
+    data.agent.map(function (agentMsgArr) {
       agentChatBox += `
         <section class="chat_box agent">
           <div class="msg">
-            <h5>Agent: ${strTime}</h5>
+            <h5>Agent: <span class="current_timer">${strTime}</span></h5>
             <h6>
             ${agentMsgArr}
             </h6>
@@ -160,7 +143,7 @@ $(document).ready(function ($) {
 
     let userChatBox = "";
     if (data.user.length > 0) {
-      data.user.map(function (userMsgArr, userIndex) {
+      data.user.map(function (userMsgArr) {
         userChatBox += `
       <section class="chat_box user">
         <div class="avatar">
@@ -172,7 +155,7 @@ $(document).ready(function ($) {
           />
         </div>
         <div class="msg">
-          <h5>Visitor: ${strTime}</h5>
+          <h5>Visitor: <span class="current_timer">${strTime}</span></h5>
           <h6>${userMsgArr}</h6>
           <h5 class="read_check"><span>Read<span> <img src='./assets/images/read.png' width='10'/></h5>
         </div>
@@ -206,15 +189,9 @@ $(document).ready(function ($) {
           </section>
     `;
     jQuery(".greeting_col").append(checkInfo);
-
-    // let chatDuration = 2000 * 2;
-    // let duration = chatDuration * (ind + 1);
-    // console.log("Info: " + duration);
-    // jQuery(".greeting_col .check_box").find("img").delay(duration).fadeIn(300);
   });
 
-  /*
-  const ChatSection = document.querySelector(".fourthfold h2.title");
+  const ChatSection = document.querySelector(".chat_body");
   let isChatDisplayed = false;
 
   function isElementInViewport(el) {
@@ -222,14 +199,13 @@ $(document).ready(function ($) {
     return rect.top >= 0 && rect.bottom <= window.innerHeight;
   }
   window.addEventListener("scroll", function () {
+    // console.log(isElementInViewport(ChatSection));
     if (isElementInViewport(ChatSection) && !isChatDisplayed) {
+      console.log("Chat play!");
       chatDisplay(); // PRODUCTION
       isChatDisplayed = true;
     }
   });
-  */
 
-  chatDisplay(); // DEVELOPMENT
+  // chatDisplay(); // DEVELOPMENT
 });
-
-// console.log(chatData[1].agent);
