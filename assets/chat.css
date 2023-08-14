@@ -5,6 +5,9 @@
   --chat-color-text: #000;
   --chat-font-family: "Poppins", sans-serif;
 }
+html {
+  scroll-behavior: smooth;
+}
 .chat_box_conversation {
   font-family: var(--chat-font-family);
 }
@@ -34,8 +37,9 @@
 }
 .chat_box.user {
   --color: #000;
-  background-color: #fff;
+  background-color: #ffffff69;
   color: var(--color);
+  box-shadow: 5px 3px 7px 0 #00000017;
   & * {
     color: var(--color) !important;
   }
@@ -44,9 +48,18 @@
   background-color: var(--chat-color-primary);
   color: #fff;
 }
-/* .chat_box_conversation .avatar {
-  width: 25%;
-} */
+.chat_box {
+  --position: -60px;
+  & .avatar {
+    position: absolute;
+    bottom: 0;
+    right: var(--position);
+  }
+  &.user .avatar {
+    right: auto;
+    left: var(--position);
+  }
+}
 .chat_box .msg {
   width: 100%;
   & h5 {
@@ -57,7 +70,7 @@
   }
   & h6 {
     line-height: 1.4rem;
-    margin: 5px 0 5px 0;
+    margin: -1px 0 5px 0;
     font-size: 14px;
     font-weight: 500;
   }
@@ -79,10 +92,10 @@ section.chat_row > .main_chat {
 }*/
 .chat_box {
   display: none;
-  display: none;
   max-width: 500px;
   margin-left: auto;
   margin-right: auto;
+  position: relative;
 }
 .check_box {
   display: flex;
@@ -125,6 +138,24 @@ section.chat_row > .main_chat {
 .checked img {
   transform: scale(1.2) translate(5px, -1px);
   display: none;
+  transform: scale(1.2) translate(5px, -1px);
+  display: none;
+  -webkit-clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+  clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+  /* background: pink; */
+}
+.show_img.checked img {
+  animation: show_img 0.3s linear 0s forwards;
+}
+@keyframes show_img {
+  0% {
+    -webkit-clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+    clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+  }
+  100% {
+    -webkit-clip-path: polygon(100% 0, 0 0, 0 100%, 100% 100%);
+    clip-path: polygon(100% 0, 0 0, 0 100%, 100% 100%);
+  }
 }
 .main_chat_box svg.bi-send-fill {
   width: 25px;
@@ -158,20 +189,16 @@ section.chat_row > .main_chat {
   pointer-events: none;
 }
 .chat_column.main_chat {
-  overflow-y: auto;
-  height: 90vh;
-  background-color: #ddd;
+  overflow-y: hidden;
+  height: 60vh;
   padding: 10px 20px;
 }
-/*
 .chat_body {
-  height: 400px;
-  width: 35%;
-  background-color: #c4c4c4;
-  overflow-y: auto;
-  margin: auto;
+  background-image: url(./images/paper-cover.jpg);
+  background-size: cover;
+  background-repeat: repeat;
+  padding: 30px 0;
 }
-*/
 /* ------------- MEDIA QURIES */
 
 @media only screen and (max-width: 1024px) {

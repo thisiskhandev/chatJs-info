@@ -16,6 +16,7 @@ $(document).ready(function ($) {
         // Changing color of greeting while active
         setTimeout(() => {
           jQuery(checkElem).find(".check_content").css("color", "#000");
+          jQuery(checkElem).find(".checked").addClass("show_img");
         }, duration);
       });
 
@@ -31,12 +32,12 @@ $(document).ready(function ($) {
           .parents(".chat_box_conversation")
           .queue(function (next) {
             var $this = jQuery(this);
-            console.log($this);
+            // console.log($this);
             setTimeout(function () {
               $this.addClass("conversation_is_activated");
               next();
               // console.log(elem);
-              console.log(duration); // Main Timer
+              // console.log(duration); // Main Timer
             }, duration);
           });
 
