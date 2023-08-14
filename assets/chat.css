@@ -3,9 +3,10 @@
   --chat-color-primary: #4393cd;
   --chat-color-secondary: #f9836b;
   --chat-color-text: #000;
+  --chat-font-family: "Poppins", sans-serif;
 }
 .chat_box_conversation {
-  font-family: "Poppins", sans-serif;
+  font-family: var(--chat-font-family);
 }
 .chat_row {
   display: flex;
@@ -90,6 +91,7 @@ section.chat_row > .main_chat {
   column-gap: 8px;
 }
 .greeting_col {
+  font-family: var(--chat-font-family);
   display: flex;
   flex-direction: column;
   align-items: start;
