@@ -1,79 +1,125 @@
 $(document).ready(function ($) {
   let firstDelay = 500;
-  function chatDisplay() {
-    let chatDuration = 2000;
-    let totalTime = 0;
+  let eventCounter = 0;
+  let limitStart = 5;
+  let isPaused = false;
 
-    setTimeout(function () {
-      jQuery(".chat_box_conversation").removeClass("conversation_is_activated");
-      jQuery(".chat_box.user:not(.user+.user)").addClass("user_first_node");
+  document.addEventListener("visibilitychange", (event) => {
+    if (document.visibilityState == "visible") {
+      isPaused = false;
+      console.log(isPaused);
+    } else {
+      isPaused = true;
+      console.log(isPaused);
+    }
+  });
 
-      // Greeting checks
-      jQuery(".greeting_col .check_box").each(function (ind, checkElem) {
-        let duration = chatDuration * ind;
-        duration = duration * 2;
-        jQuery(checkElem).find("img").delay(duration).fadeIn(300);
-        // Changing color of greeting while active
-        setTimeout(() => {
-          jQuery(checkElem).find(".check_content").css("color", "#000");
-          jQuery(checkElem).find(".checked").addClass("show_img");
-        }, duration);
-      });
+  if (!isPaused) {
+    function chatDisplay() {
+      let chatDuration = 2000;
+      let totalTime = 0;
 
-      jQuery(".chat_box").each(function (ind, elem) {
-        let duration = 0;
-        duration = chatDuration * ind;
-        // console.log("Chat Box duration: " + duration);
-        totalTime = duration;
+      setTimeout(function () {
+        jQuery(".chat_box_conversation").removeClass(
+          "conversation_is_activated"
+        );
+        jQuery(".chat_box.user:not(.user+.user)").addClass("user_first_node");
 
-        jQuery(elem).delay(duration).slideDown(300);
+        // Greeting checks
+        jQuery(".greeting_col .check_box").each(function (ind, checkElem) {
+          let duration = chatDuration * ind;
+          duration = duration * 2;
+          jQuery(checkElem).find("img").delay(duration).fadeIn(300);
+          // Changing color of greeting while active
+          setTimeout(() => {
+            jQuery(checkElem).find(".check_content").css("color", "#000");
+            jQuery(checkElem)
+              .find(".check_content h5")
+              .css("color", "var(--chat-color-info)");
+            jQuery(checkElem).find(".checked").addClass("show_img");
+          }, duration);
+        });
 
-        jQuery(elem)
-          .parents(".chat_box_conversation")
-          .queue(function (next) {
-            var $this = jQuery(this);
-            // console.log($this);
-            setTimeout(function () {
-              $this.addClass("conversation_is_activated");
-              next();
-              // console.log(elem);
-              // console.log(duration); // Main Timer
-            }, duration);
-          });
+        jQuery(".chat_box").each(function (ind, elem) {
+          let duration = 0;
+          duration = chatDuration * ind;
+          // console.log("Chat Box duration: " + duration);
+          totalTime = duration;
 
-        setTimeout(() => {
-          // $(".chat_body").animate(
-          //   {
-          //     scrollTop: $(elem).offset().top,
-          //   },
-          //   1000
-          // );
-          jQuery(".chat_column.main_chat").animate(
-            {
-              scrollTop: jQuery(document).height() + jQuery(window).height(),
-            },
-            500
-          );
-        }, duration + 2000);
-      });
+          jQuery(elem).delay(duration).slideDown(300);
 
-      var startEvent = new CustomEvent("slide_ended", {
-        detail: { timer: totalTime },
-      });
-      document.dispatchEvent(startEvent);
-    }, firstDelay + 2000);
+          jQuery(elem)
+            .parents(".chat_box_conversation")
+            .queue(function (next) {
+              var $this = jQuery(this);
+              // console.log($this);
+              setTimeout(function () {
+                $this.addClass("conversation_is_activated");
+                next();
+                // console.log(elem);
+                // console.log(duration); // Main Timer
+              }, duration);
+            });
+
+          setTimeout(() => {
+            // $(".chat_body").animate(
+            //   {
+            //     scrollTop: $(elem).offset().top,
+            //   },
+            //   1000
+            // );
+            jQuery(".chat_column.main_chat").animate(
+              {
+                scrollTop: jQuery(document).height() + jQuery(window).height(),
+              },
+              500
+            );
+          }, duration + 2000);
+        });
+
+        var startEvent = new CustomEvent("slide_ended", {
+          detail: { timer: totalTime },
+        });
+        document.dispatchEvent(startEvent);
+      }, firstDelay + 2000);
+    }
+
+    function initialInfo() {
+      jQuery(".check_box img").fadeOut(0);
+      jQuery(".greeting_col .check_box .check_content").css("color", "gray");
+      jQuery(".greeting_col .check_box .check_content h5").css("color", "gray");
+    }
+  } else {
+    return;
   }
 
   // Restarting the ChatDisplay Function
   document.addEventListener("slide_ended", (event) => {
     setTimeout(function () {
-      jQuery(".chat_box").fadeOut(0);
-      jQuery(".check_box img").fadeOut(0);
-      jQuery(".greeting_col .check_box .check_content").css("color", "gray");
-      chatDisplay();
       console.log(
         "Event restarted: " + (event.detail.timer + firstDelay + 2000)
       );
+
+      // Paused
+      if (eventCounter === limitStart) {
+        console.log("5 Times equal");
+        return;
+      }
+
+      if (isPaused) {
+        return;
+      } else {
+        jQuery(".chat_box").fadeOut(0);
+        initialInfo();
+        chatDisplay();
+      }
+
+      // jQuery(".chat_box").fadeOut(0);
+      // initialInfo();
+      // chatDisplay();
+
+      eventCounter = eventCounter + 1;
+      console.log("Event Counter: " + eventCounter);
     }, event.detail.timer + firstDelay + 2000);
   });
 

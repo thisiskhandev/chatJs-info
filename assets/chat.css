@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 :root {
   --chat-color-primary: #4393cd;
-  --chat-color-secondary: #f9836b;
+  --chat-color-info: #f9836b;
   --chat-color-text: #000;
   --chat-font-family: "Poppins", sans-serif;
 }
@@ -82,9 +82,10 @@ html {
   object-fit: cover;
   object-position: top;
 }
-main.chat_box_conversation {
-  margin-bottom: 5px;
-} /*
+.chat_box_conversation:not(:last-child) {
+  margin-bottom: 35px;
+}
+/*
 section.chat_row > .main_chat {
   overflow: hidden;
   display: grid;
