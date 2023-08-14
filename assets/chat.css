@@ -4,6 +4,7 @@
   --chat-color-info: #f9836b;
   --chat-color-text: #000;
   --chat-font-family: "Poppins", sans-serif;
+  --chat-radius: 10px;
 }
 html {
   scroll-behavior: smooth;
@@ -93,9 +94,9 @@ section.chat_row > .main_chat {
 }*/
 .chat_box {
   display: none;
-  max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
+  max-width: 310px;
+  margin-left: 0;
+  margin-right: 0;
   position: relative;
 }
 .check_box {
@@ -190,25 +191,56 @@ section.chat_row > .main_chat {
 .main_chat_box img {
   pointer-events: none;
 }
-.chat_column.main_chat {
-  overflow: hidden;
+.chat_column .main_chat {
+  overflow-y: auto;
   height: 60vh;
   padding: 10px 20px;
 }
 .chat_body {
+  font-family: var(--chat-font-family);
   background-image: url(./images/paper-cover.jpg);
   background-size: cover;
   background-repeat: repeat;
   padding: 30px 0;
   overflow: hidden;
 }
+.chat_box_full {
+  max-width: 400px;
+  margin: auto;
+  background-color: pink;
+}
+.chat_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  font-weight: bold;
+  color: #fff;
+  background-color: var(--chat-color-primary);
+  border-top-right-radius: var(--chat-radius);
+  border-top-left-radius: var(--chat-radius);
+  height: 50px;
+}
+.chat_logo_bar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #fff;
+  padding: 20px 0;
+}
+.chat_box.agent {
+  margin-right: 46px;
+}
+.chat_box.user {
+  margin-left: 46px;
+}
 /* ------------- MEDIA QURIES */
 
 @media only screen and (min-width: 1025px) and (max-width: 1300px) {
-  .chat_column.main_chat {
+  .chat_column .main_chat {
     width: 60%;
   }
-  .chat_column.greeting_col {
+  .chat_column .greeting_col {
     width: 40%;
     margin-left: 0;
   }
@@ -224,7 +256,7 @@ section.chat_row > .main_chat {
 }
 
 @media only screen and (max-width: 767px) {
-  .chat_column.main_chat {
+  .chat_column .main_chat {
     overflow-y: auto;
   }
   .chat_box_conversation {
@@ -248,7 +280,7 @@ section.chat_row > .main_chat {
     margin-left: 0;
     row-gap: 5px;
   }
-  .chat_column.main_chat {
+  .chat_column .main_chat {
     height: 50vh;
   }
   .chat_box {

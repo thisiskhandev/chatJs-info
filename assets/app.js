@@ -61,11 +61,15 @@ $(document).ready(function ($) {
             });
 
           setTimeout(() => {
-            jQuery(".chat_column.main_chat").animate(
+            jQuery(".main_chat").animate(
               {
                 scrollTop: jQuery(document).height() + jQuery(window).height(),
               },
-              500
+              1000
+              // {
+              //   scrollTop: $(elem).offset().top,
+              // },
+              // 1500
             );
           }, duration + 2000);
         });
