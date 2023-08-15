@@ -16,7 +16,7 @@ $(document).ready(function ($) {
 
   if (!isPaused) {
     function chatDisplay() {
-      console.log("not paused");
+      // console.log("not paused");
       let chatDuration = 2000;
       let totalTime = 0;
       let duration = 0;
@@ -56,7 +56,7 @@ $(document).ready(function ($) {
               var $this = jQuery(this);
               setTimeout(function () {
                 $this.addClass("conversation_is_activated");
-                console.log(duration); // Main Timer
+                // console.log(duration); // Main Timer
                 next();
               }, duration);
             });
@@ -72,7 +72,7 @@ $(document).ready(function ($) {
               // },
               // 1500
             );
-            console.log("Scrollbar: " + duration);
+            // console.log("Scrollbar: " + duration);
           }, duration);
         });
 

@@ -46,9 +46,10 @@ html {
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: center;
+  justify-content: center;
 }
 .chat_column {
-  width: 50%;
+  width: 35%;
 }
 .chat_box {
   display: flex;
@@ -141,7 +142,6 @@ section.chat_row > .main_chat {
   align-items: start;
   justify-content: center;
   row-gap: 30px;
-  margin-left: 80px;
 }
 .check_content h5 {
   font-size: 18px;
@@ -222,7 +222,7 @@ section.chat_row > .main_chat {
 }
 .chat_column .main_chat {
   overflow-y: auto;
-  height: 50vh;
+  height: 450px;
   padding: 10px 20px;
   background-color: #e5e5e5;
 }
@@ -302,6 +302,12 @@ section.chat_row > .main_chat {
   }
 }
 
+@media only screen and (max-width: 1200px) {
+  .chat_column {
+    width: 50%;
+  }
+}
+
 @media only screen and (max-width: 1024px) {
   .chat_row {
     flex-direction: column;
@@ -309,15 +315,14 @@ section.chat_row > .main_chat {
   .chat_column {
     width: 100%;
   }
+  .greeting_col {
+    margin-top: 40px;
+  }
 }
 
 @media only screen and (max-width: 767px) {
   .chat_column .main_chat {
     overflow-y: auto;
-  }
-  .chat_box_conversation {
-    margin-left: 60px;
-    margin-right: 60px;
   }
   .check_content {
     width: 100%;
@@ -338,9 +343,6 @@ section.chat_row > .main_chat {
   .greeting_col {
     margin-left: 0;
     row-gap: 5px;
-  }
-  .chat_column .main_chat {
-    height: 50vh;
   }
   .chat_box {
     padding: 6px;
@@ -365,5 +367,11 @@ section.chat_row > .main_chat {
   .check_box .checked {
     width: 30px;
     height: 30px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .chat_body {
+    padding: 30px 10px;
   }
 }
