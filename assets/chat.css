@@ -6,6 +6,35 @@
   --chat-font-family: "Poppins", sans-serif;
   --chat-radius: 10px;
 }
+
+/* Firefox */
+.main_chat {
+  scrollbar-width: thin;
+  scrollbar-color: var(--chat-color-primary);
+}
+/* Chrome, Edge and Safari */
+.main_chat::-webkit-scrollbar {
+  width: 8px;
+}
+.main_chat::-webkit-scrollbar-track {
+  display: none;
+}
+.main_chat::-webkit-scrollbar-track:hover {
+  background-color: #333;
+}
+.main_chat::-webkit-scrollbar-track:active {
+  background-color: var(--chat-color-primary);
+}
+.main_chat::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: var(--chat-color-primary);
+}
+.main_chat::-webkit-scrollbar-thumb:hover {
+  background-color: var(--chat-color-primary);
+}
+.main_chat::-webkit-scrollbar-thumb:active {
+  background-color: var(--chat-color-info);
+}
 html {
   scroll-behavior: smooth;
 }
@@ -193,8 +222,9 @@ section.chat_row > .main_chat {
 }
 .chat_column .main_chat {
   overflow-y: auto;
-  height: 60vh;
+  height: 50vh;
   padding: 10px 20px;
+  background-color: #e5e5e5;
 }
 .chat_body {
   font-family: var(--chat-font-family);
@@ -207,7 +237,7 @@ section.chat_row > .main_chat {
 .chat_box_full {
   max-width: 400px;
   margin: auto;
-  background-color: pink;
+  filter: drop-shadow(2px 6px 10px #00000036);
 }
 .chat_header {
   display: flex;
@@ -234,14 +264,40 @@ section.chat_row > .main_chat {
 .chat_box.user {
   margin-left: 46px;
 }
+.chat_footer {
+  background-color: #fff;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+.chat_footer * {
+  opacity: 0.8;
+}
+.emoji_send {
+  display: flex;
+  gap: 15px;
+}
+#agentAvatar::after {
+  content: "";
+  background-color: #21cb3d;
+  display: block;
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  border-radius: 50px;
+  top: 0;
+  right: -3px;
+}
+
+#agentAvatar {
+  position: relative;
+}
 /* ------------- MEDIA QURIES */
 
 @media only screen and (min-width: 1025px) and (max-width: 1300px) {
-  .chat_column .main_chat {
-    width: 60%;
-  }
   .chat_column .greeting_col {
-    width: 40%;
     margin-left: 0;
   }
 }
@@ -273,6 +329,9 @@ section.chat_row > .main_chat {
 }
 
 @media only screen and (max-width: 575px) {
+  .chat_column .main_chat {
+    height: 50vh;
+  }
   .current_timer {
     display: none;
   }

@@ -19,12 +19,13 @@ $(document).ready(function ($) {
       console.log("not paused");
       let chatDuration = 2000;
       let totalTime = 0;
+      let duration = 0;
 
       setTimeout(function () {
         jQuery(".chat_box_conversation").removeClass(
           "conversation_is_activated"
         );
-        jQuery(".chat_box.user:not(.user+.user)").addClass("user_first_node");
+        // jQuery(".chat_box.user:not(.user+.user)").addClass("user_first_node");
 
         // Greeting checks
         jQuery(".greeting_col .check_box").each(function (ind, checkElem) {
@@ -42,7 +43,7 @@ $(document).ready(function ($) {
         });
 
         jQuery(".chat_box").each(function (ind, elem) {
-          let duration = 0;
+          duration = 0;
           duration = chatDuration * ind;
           // console.log("Chat Box duration: " + duration);
           totalTime = duration;
@@ -55,8 +56,8 @@ $(document).ready(function ($) {
               var $this = jQuery(this);
               setTimeout(function () {
                 $this.addClass("conversation_is_activated");
+                console.log(duration); // Main Timer
                 next();
-                // console.log(duration); // Main Timer
               }, duration);
             });
 
@@ -65,13 +66,14 @@ $(document).ready(function ($) {
               {
                 scrollTop: jQuery(document).height() + jQuery(window).height(),
               },
-              1000
+              300
               // {
-              //   scrollTop: $(elem).offset().top,
+              //   scrollTop: $(".main_chat").offset().top,
               // },
               // 1500
             );
-          }, duration + 2000);
+            console.log("Scrollbar: " + duration);
+          }, duration);
         });
 
         var startEvent = new CustomEvent("slide_ended", {
